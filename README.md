@@ -5,9 +5,15 @@ Check directory `examples` for examples on how to use libraries to integrate wit
 ## Quick start guides
 ### 1. Connect your app to Snowflake Safe
 Pick a library which is suitable with your current app. This library allows Snowflake Safe to connect to your app as a wallet. You can visit these directory in `examples` to see how to implement using a specific library
-- Use `safe-adapter-react`: [example/safe-adapter-react](https://github.com/snowflake-so/safe-apps-starter/tree/master/examples/safe-apps-example/src/example/safe-adapter-react)
-- Use `safe-saber-walletkit`: [example/safe-saber-walletkit](https://github.com/snowflake-so/safe-apps-starter/tree/master/examples/safe-apps-example/src/example/safe-saber-walletkit)
-- Use `safe-apps-provider`: [example/https://github.com/snowflake-so/safe-apps-starter/tree/master/examples/safe-apps-example/src/example/safe-apps-provider]
+#### `safe-adapter-react`
+Commonly, most projects will connect to Solana wallets using a library provided by Solana Labs `@solana/safe-adapter-react`. If your project also use the library to connect to wallet, please use `@snowflake-safe/safe-adapter-react` library to connect to your wallet
+- View example: [example/safe-adapter-react](https://github.com/snowflake-so/safe-apps-starter/tree/master/examples/safe-apps-example/src/example/safe-adapter-react)
+#### `safe-saber-walletkit`
+This is an overidden version of this library from Saber team (@saberhq/use-solana)[https://github.com/saber-hq/saber-common/tree/master/packages/use-solana]. If your project also use the library to connect to wallet, please use `@snowflake-safe/safe-saber-walletkit` library to connect to your wallet
+- View example: [example/safe-saber-walletkit](https://github.com/snowflake-so/safe-apps-starter/tree/master/examples/safe-apps-example/src/example/safe-saber-walletkit)
+#### `safe-apps-provider`
+In case your app does not use any package above, you can use a Safe Apps Provider library, which is just a simple package uses React Context API
+- View example: [example/safe-apps-provider](https://github.com/snowflake-so/safe-apps-starter/tree/master/examples/safe-apps-example/src/example/safe-apps-provider)
 ### 2. Create a proposal
 Use a SDK from `@snowflake-so/safe-apps-provider` to create a multisig proposal
 ```typescript
