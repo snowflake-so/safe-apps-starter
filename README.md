@@ -2,6 +2,43 @@
 
 Check directory `examples` for examples on how to use libraries to integrate with Snowflake Safe.
 
+## Quick start guides
+### 1. Connect your app to Snowflake Safe
+Pick a library which is suitable with your current app. This library allows Snowflake Safe to connect to your app as a wallet. You can visit these directory in `examples` to see how to implement using a specific library
+- Use `safe-adapter-react`: [example/safe-adapter-react](https://github.com/snowflake-so/safe-apps-starter/tree/master/examples/safe-apps-example/src/example/safe-adapter-react)
+- Use `safe-saber-walletkit`: [example/safe-saber-walletkit](https://github.com/snowflake-so/safe-apps-starter/tree/master/examples/safe-apps-example/src/example/safe-saber-walletkit)
+- Use `safe-apps-provider`: [example/https://github.com/snowflake-so/safe-apps-starter/tree/master/examples/safe-apps-example/src/example/safe-apps-provider]
+### 2. Create a proposal
+Use a SDK from `@snowflake-so/safe-apps-provider` to create a multisig proposal
+```typescript
+import { useSafe } from '@snowflake-so/safe-apps-provider';
+
+const ExampleComponent = () => {
+  const walletCtx = useSafeWallet();
+  const { sdk } = useSafe();
+  const [returnData, setReturnData] = useState<any>({});
+  const [returnError, setReturnError] = useState<any>({});
+
+  const handleCreateProposal = async () => {
+    try {
+      const returnData = await sdk?.txs.createProposal({
+        display: {
+          proposalName: 'Safe Apps SDK Example',
+        },
+        executeInstructions: [],
+        setupInstructions: [],
+        signers: [],
+      });
+      setReturnData(returnData);
+    } catch (error: any) {
+      setReturnError(error);
+    }
+  };
+  
+  return <>{JSON.stringify(returnData, null, 4)}</>
+}
+```
+
 ## Supported libraries
 
 Browse the list below to see the suitable package:
