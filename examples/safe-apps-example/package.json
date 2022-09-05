@@ -1,0 +1,77 @@
+{
+  "private": true,
+  "name": "@snowflake-so/safe-apps-example",
+  "version": "0.1.0",
+  "dependencies": {
+    "@emotion/core": "^11.0.0",
+    "@emotion/react": "^11.9.3",
+    "@emotion/styled": "^11.8.1",
+    "@gokiprotocol/walletkit": "^1.7.3",
+    "@project-serum/anchor": "^0.25.0-beta.1",
+    "@reach/dialog": "^0.17.0",
+    "@saberhq/solana-contrib": "^1.13.19",
+    "@saberhq/token-utils": "^1.13.19",
+    "@saberhq/use-solana": "^1.13.19",
+    "@snowflake-so/safe-adapter-react": "*",
+    "@snowflake-so/safe-adapter-react-ui": "*",
+    "@snowflake-so/safe-apps-provider": "*",
+    "@snowflake-so/safe-saber-walletkit": "*",
+    "@snowflake-so/safe-sdk": "*",
+    "@solana/wallet-adapter-base": "^0.9.4",
+    "@solana/wallet-adapter-react": "^0.15.3",
+    "@solana/wallet-adapter-react-ui": "^0.9.5",
+    "@solana/wallet-adapter-wallets": "^0.16.0",
+    "@solana/web3.js": "^1.36.0",
+    "antd": "^4.21.6",
+    "crypto-browserify": "^3.12.0",
+    "jsbi": "^4.3.0",
+    "polished": "^4.2.2",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "web-vitals": "^2.1.4"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.18.2",
+    "@babel/plugin-proposal-private-property-in-object": "^7.17.12",
+    "@babel/preset-react": "^7.17.12",
+    "@emotion/babel-plugin": "^11.9.2",
+    "@testing-library/jest-dom": "^5.16.2",
+    "@testing-library/react": "^12.1.4",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/babel__core": "^7.1.19",
+    "@types/jest": "^27.4.0",
+    "@types/node": "^17.0.0",
+    "@types/react": "^17.0.40",
+    "@types/react-dom": "^17.0.11",
+    "process": "^0.11.10",
+    "react-app-rewired": "^2.1.11",
+    "react-scripts": "^5.0.0",
+    "source-map-loader": "^3.0.1",
+    "typescript": "^4.5.5",
+    "webpack": "^5.72.1"
+  },
+  "scripts": {
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

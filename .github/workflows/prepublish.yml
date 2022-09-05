@@ -1,0 +1,36 @@
+name: prepublish
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+permissions:
+  contents: read # for checkout
+  pull-requests: write # for comments
+
+jobs:
+  prepublish:
+    name: prepublish
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Use Node 17.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: '17.x'
+
+      - name: Install dependencies
+        run: npm run ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Prettier check
+        run: npm run prettier:check
+
+      - name: Build
+        run: npm run build

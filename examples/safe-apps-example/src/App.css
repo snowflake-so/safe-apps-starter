@@ -1,0 +1,44 @@
+.App {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(1, 2, 30);
+  color: white;
+}
+
+.ant-menu {
+  background-color: transparent !important;
+}
+
+.ant-menu-title-content {
+  color: white;
+}
+
+.ant-menu-item-selected {
+  background-color: rgb(34, 38, 135) !important;
+}
+
+h1,
+h2,
+h3,
+p,
+td,
+th {
+  color: white !important;
+}
+
+.ant-table {
+  background-color: transparent !important;
+  border: none;
+  color: white;
+}
+
+.ant-table-tbody > tr > td {
+  border-bottom: none;
+}
+
+.ant-table-thead > tr > th {
+  background-color: transparent !important;
+  border-bottom: none;
+}
