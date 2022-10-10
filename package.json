@@ -15,8 +15,7 @@
     "prettier:check": "prettier --config .prettierrc.js 'examples/**/*.{js,jsx,ts,tsx}' --check",
     "graph": "npx nx graph",
     "build": "npx lerna run build",
-    "preci": "rm -fr node_modules",
-    "ci": "yarn install --immutable"
+    "preci": "rm -fr node_modules"
   },
   "precommit.silent": true,
   "pre-commit": [
