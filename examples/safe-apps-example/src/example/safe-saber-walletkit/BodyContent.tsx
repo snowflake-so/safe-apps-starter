@@ -1,17 +1,14 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { ConnectWalletButton } from '@gokiprotocol/walletkit';
-import { PendingTransaction } from '@saberhq/solana-contrib';
-import { createInitMintInstructions } from '@saberhq/token-utils';
 import {
   ConnectedWallet,
   useConnectedSafeWallet,
   useSnowflakeSolana,
 } from '@snowflake-so/safe-saber-walletkit';
-import { Keypair, LAMPORTS_PER_SOL } from '@solana/web3.js';
+import { LAMPORTS_PER_SOL } from '@solana/web3.js';
 import { lighten } from 'polished';
 import { useCallback, useEffect, useState } from 'react';
-import invariant from 'tiny-invariant';
 import { PublicKey } from '@solana/web3.js';
 
 export type ConnectedSafeWallet = ConnectedWallet & {
@@ -79,35 +76,6 @@ export const BodyContent: React.FC = () => {
                 void setNetwork('devnet');
               }}>
               Switch to Devnet
-            </Button>
-            <Button
-              disabled={!providerMut}
-              // eslint-disable-next-line @typescript-eslint/no-misused-promises
-              onClick={async () => {
-                invariant(providerMut, 'providerMut');
-                const txSig = await providerMut.connection.requestAirdrop(
-                  providerMut.wallet.publicKey,
-                  LAMPORTS_PER_SOL
-                );
-                await new PendingTransaction(providerMut.connection, txSig).wait();
-                await refetchSOL();
-              }}>
-              Request 1 SOL
-            </Button>
-            <Button
-              disabled={!providerMut}
-              // eslint-disable-next-line @typescript-eslint/no-misused-promises
-              onClick={async () => {
-                invariant(providerMut, 'providerMut');
-                const tx = await createInitMintInstructions({
-                  provider: providerMut,
-                  mintKP: Keypair.generate(),
-                  decimals: 9,
-                });
-                await tx.confirm();
-                await refetchSOL();
-              }}>
-              Send Transaction
             </Button>
           </Buttons>
         </WalletInfo>
