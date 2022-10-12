@@ -3,6 +3,7 @@ import { Layout, Menu, Table, Tag } from 'antd';
 import ExampleSafeAdapterReact from './example/safe-adapter-react';
 import ExampleSafeSaberWalletKit from './example/safe-saber-walletkit';
 import ExampleSafeAppsProvider from './example/safe-apps-provider';
+import ExampleWalletAdapterSnowflake from './example/wallet-adapter-snowflake';
 
 const { Sider, Content } = Layout;
 
@@ -77,6 +78,12 @@ const data: any[] = [
     description: 'Set of hooks to use with the library @saber/use-solana',
     tags: ['React', '@saber/use-solana'],
   },
+  {
+    key: '4',
+    name: 'Wallet Adapter Snowflake',
+    description: 'A wallet adapter built for Snowflake Safe integration',
+    tags: ['React', '@solana/wallet-adapter'],
+  },
 ];
 
 const Landing = () => {
@@ -129,6 +136,13 @@ const App: FC = () => {
                   setRoutes('safe-saber-walletkit');
                 },
               },
+              {
+                key: 'wallet-adapter-snowflake',
+                label: 'Wallet Adapter',
+                onClick: () => {
+                  setRoutes('wallet-adapter-snowflake');
+                },
+              },
             ]}
           />
         </Sider>
@@ -139,6 +153,7 @@ const App: FC = () => {
               {route === 'safe-apps-provider' && <ExampleSafeAppsProvider />}
               {route === 'safe-adapter-react' && <ExampleSafeAdapterReact />}
               {route === 'safe-saber-walletkit' && <ExampleSafeSaberWalletKit />}
+              {route === 'wallet-adapter-snowflake' && <ExampleWalletAdapterSnowflake />}
             </div>
           </Content>
         </Layout>
