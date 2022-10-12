@@ -8,6 +8,7 @@ Check directory `examples` for examples on how to use libraries to integrate wit
 
 It is very simple, you just have to add Snowflake Wallet Adapter to the `wallets` list attributes of the `WalletProvider` and it will work normally.
 
+### Adding `SnowflakeSafeWalletAdapter` to `WalletProvider`
 ```tsx
 import React, { FC, useMemo } from 'react';
 import { ConnectionProvider, WalletProvider } from '@solana/wallet-adapter-react';
@@ -44,6 +45,18 @@ export const Wallet: FC = () => {
     </ConnectionProvider>
   );
 };
+```
+### Sending transactions
+```typescript
+const wallet = useWallet();
+
+wallet.sendTransactions(
+  transaction,
+  null as any,
+  {
+    name: 'Mock proposal',
+  } as any
+);
 ```
 
 ## Approach 2: Using overridden packages
