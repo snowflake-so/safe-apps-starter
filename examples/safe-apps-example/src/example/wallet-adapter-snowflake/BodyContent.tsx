@@ -35,11 +35,20 @@ const BodyContent = (props: Props) => {
   };
   return (
     <div className="App">
-      <WalletMultiButton />
-      <div style={{ marginLeft: 20 }}>
-        <Button type="primary" size="large" onClick={handleCreateProposal}>
-          Create a mock proposal
-        </Button>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}>
+        <WalletMultiButton />
+        <div style={{ margin: '20px 0px' }}>Wallet public key: {wallet?.publicKey?.toString()}</div>
+        <div>
+          <Button type="primary" size="large" onClick={handleCreateProposal}>
+            Create a mock proposal
+          </Button>
+        </div>
       </div>
     </div>
   );
