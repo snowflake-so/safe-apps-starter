@@ -8,6 +8,14 @@ Check directory `examples` for examples on how to use libraries to integrate wit
 
 It is very simple, you just have to add Snowflake Wallet Adapter to the `wallets` list attributes of the `WalletProvider` and it will work normally.
 
+### Installation
+```
+npm install @snowflake-so/wallet-adapter-snowflake
+```
+or
+```
+yarn add @snowflake-so/wallet-adapter-snowflake
+```
 ### Adding `SnowflakeSafeWalletAdapter` to `WalletProvider`
 ```tsx
 import React, { FC, useMemo } from 'react';
@@ -56,6 +64,30 @@ wallet.sendTransactions(
   {
     name: 'Mock proposal',
   } as any
+);
+```
+### Sign a transaction
+```typescript
+const wallet = useWallet();
+
+const transaction : Transaction = wallet.signTransaction(
+  transaction,
+);
+```
+### Sign a message
+```typescript
+const wallet = useWallet();
+
+const message : Uint8Array = wallet.signMessage(
+  message,
+);
+```
+### Sign all transactions
+```typescript
+const wallet = useWallet();
+
+const transactions : Transaction[] = wallet.signAllTransactions(
+  transactions,
 );
 ```
 
