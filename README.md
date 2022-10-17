@@ -1,8 +1,8 @@
 # Safe Apps Starter
 
-Check directory `examples` for examples on how to use libraries to integrate with Snowflake Safe.
+Check directory `examples/wallet-adapter-snowflake` for examples on how to use libraries to integrate with Snowflake Safe.
 
-## Approach 1: Using Wallet Adapter Snowflake
+## Using Wallet Adapter Snowflake
 
 **Note**: The implemented application only works inner Snowflake Safe app.
 
@@ -58,7 +58,7 @@ export const Wallet: FC = () => {
 ```typescript
 const wallet = useWallet();
 
-wallet.sendTransactions(
+const txId = await wallet.sendTransactions(
   transaction,
   null as any,
   {
@@ -70,7 +70,7 @@ wallet.sendTransactions(
 ```typescript
 const wallet = useWallet();
 
-const transaction : Transaction = wallet.signTransaction(
+const transaction : Transaction = await wallet.signTransaction(
   transaction,
 );
 ```
@@ -78,7 +78,7 @@ const transaction : Transaction = wallet.signTransaction(
 ```typescript
 const wallet = useWallet();
 
-const message : Uint8Array = wallet.signMessage(
+const message : Uint8Array = await wallet.signMessage(
   message,
 );
 ```
@@ -86,78 +86,14 @@ const message : Uint8Array = wallet.signMessage(
 ```typescript
 const wallet = useWallet();
 
-const transactions : Transaction[] = wallet.signAllTransactions(
+const transactions : Transaction[] = await wallet.signAllTransactions(
   transactions,
 );
 ```
-
-## Approach 2: Using overridden packages
-
-### 1. Connect your app to Snowflake Safe
-
-Pick a library which is suitable with your current app. This library allows Snowflake Safe to connect to your app as a wallet. You can visit these directory in `examples` to see how to implement using a specific library
-
-#### `safe-adapter-react`
-
-Commonly, most projects will connect to Solana wallets using a library provided by Solana Labs `@solana/safe-adapter-react`. If your project also use the library to connect to wallet, please use `@snowflake-safe/safe-adapter-react` library to connect to your wallet
-
-- View example: [example/safe-adapter-react](https://github.com/snowflake-so/safe-apps-starter/tree/master/examples/safe-apps-example/src/example/safe-adapter-react)
-
-#### `safe-saber-walletkit`
-
-This is an overidden version of this library from Saber team (@saberhq/use-solana)[https://github.com/saber-hq/saber-common/tree/master/packages/use-solana]. If your project also use the library to connect to wallet, please use `@snowflake-safe/safe-saber-walletkit` library to connect to your wallet
-
-- View example: [example/safe-saber-walletkit](https://github.com/snowflake-so/safe-apps-starter/tree/master/examples/safe-apps-example/src/example/safe-saber-walletkit)
-
-#### `safe-apps-provider`
-
-In case your app does not use any package above, you can use a Safe Apps Provider library, which is just a simple package uses React Context API
-
-- View example: [example/safe-apps-provider](https://github.com/snowflake-so/safe-apps-starter/tree/master/examples/safe-apps-example/src/example/safe-apps-provider)
-
-### 2. Create a proposal
-
-Use a SDK from `@snowflake-so/safe-apps-provider` to create a multisig proposal
-
-```typescript
-import { useSafe } from '@snowflake-so/safe-apps-provider';
-
-const ExampleComponent = () => {
-  const walletCtx = useSafeWallet();
-  const { sdk } = useSafe();
-  const [returnData, setReturnData] = useState<any>({});
-  const [returnError, setReturnError] = useState<any>({});
-
-  const handleCreateProposal = async () => {
-    try {
-      const returnData = await sdk?.txs.createProposal({
-        display: {
-          proposalName: 'Safe Apps SDK Example',
-        },
-        executeInstructions: [],
-        setupInstructions: [],
-        signers: [],
-      });
-      setReturnData(returnData);
-    } catch (error: any) {
-      setReturnError(error);
-    }
-  };
-
-  return <>{JSON.stringify(returnData, null, 4)}</>;
-};
-```
-
-## Supported libraries
-
-Browse the list below to see the suitable package:
-| Component | Description | NPM Package | Status |
-| --------------------------- | ------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------- |-----|
-| Wallet Adapter Snowflake | Snowflake Safe Wallet Adapter for [Solana Wallet Adapter](https://github.com/solana-labs/wallet-adapter)| [@snowflake-so/wallet-adapter-snowflake](https://www.npmjs.com/package/@snowflake-so/wallet-adapter-snowflake) |[![npm](https://img.shields.io/npm/v/@snowflake-so/wallet-adapter-snowflake)](https://www.npmjs.com/package/@snowflake-so/wallet-adapter-snowflake)|
-| React Provider | Provides React provider and context API to retrieve the data of the Safe from the child app | [@snowflake-so/safe-apps-provider](https://www.npmjs.com/package/@snowflake-so/safe-apps-provider) |[![npm](https://img.shields.io/npm/v/@snowflake-so/safe-apps-provider)](https://www.npmjs.com/package/@snowflake-so/safe-apps-provider)|
-| Safe Saber Walletkit | Forked version of [@saberhq/use-solana](https://github.com/saber-hq/saber-common/tree/master/packages/use-solana) to provide Safe specialized hooks | [@snowflake-so/safe-saber-walletkit](https://www.npmjs.com/package/@snowflake-so/safe-saber-walletkit) |[![npm](https://img.shields.io/npm/v/@snowflake-so/safe-saber-walletkit)](https://www.npmjs.com/package/@snowflake-so/safe-saber-walletkit)|
-| Safe Adapter React | Snowflake Safe integrated [Solana Wallet Adapter React](https://github.com/solana-labs/wallet-adapter)| [@snowflake-so/safe-adapter-react](https://www.npmjs.com/package/@snowflake-so/safe-adapter-react) |[![npm](https://img.shields.io/npm/v/@snowflake-so/safe-adapter-react)](https://www.npmjs.com/package/@snowflake-so/safe-adapter-react)|
-| Safe Adapter React UI | Snowflake Safe integrated UI for [Solana Wallet Adapter React](https://github.com/solana-labs/wallet-adapter)| [@snowflake-so/safe-adapter-react-ui](https://www.npmjs.com/package/@snowflake-so/safe-adapter-react-ui) |[![npm](https://img.shields.io/npm/v/@snowflake-so/safe-adapter-react-ui)](https://www.npmjs.com/package/@snowflake-so/safe-adapter-react-ui)|
+## Testing your app
+The wallet adapter is designed to work only for apps integrating with Snowflake Safe. To test your app, please go to [Snowflake Safe Mainnet](https://safe.snowflake.so) or [Snowflake Safe Devnet](https:://safe-devnet.snowflake.so), select your safe and go to `Apps` tab and click on `Add custom app` to add your app locally to Snowflake Safe for testing.
+## Deploy your app
+For now, we don't have any official approach to deploy the app on Snowflake Safe. If you want to list your app on Snowflake, please go to our discord and contact for integration.
 
 ## Support
 
