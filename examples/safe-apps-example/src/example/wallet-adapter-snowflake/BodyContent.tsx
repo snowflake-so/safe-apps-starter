@@ -54,7 +54,7 @@ const BodyContent = (props: Props) => {
     const _transaction = await makeTxn(instructions, wallet.publicKey as any);
     if (wallet.signTransaction) {
       const transaction = await wallet.signTransaction(_transaction);
-      console.log(transaction);
+      console.log(transaction.compileMessage());
     }
   };
 
@@ -68,12 +68,12 @@ const BodyContent = (props: Props) => {
   const handleSignAllTransactions = async () => {
     const _transaction = await makeTxn(instructions, wallet.publicKey as any);
     if (wallet.signAllTransactions) {
-      const transaction = await wallet.signAllTransactions([
+      const transactions = await wallet.signAllTransactions([
         _transaction,
         _transaction,
         _transaction,
       ]);
-      console.log(transaction);
+      console.log(transactions.map(transaction => transaction.compileMessage()));
     }
   };
 
