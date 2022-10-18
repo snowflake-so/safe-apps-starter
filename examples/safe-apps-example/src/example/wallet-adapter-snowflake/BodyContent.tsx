@@ -6,11 +6,11 @@ import { Connection, PublicKey, Transaction, TransactionInstruction } from '@sol
 
 type Props = {};
 
+const connection = new Connection('https://api.mainnet-beta.solana.com');
 const makeTxn = async (
   instructions: TransactionInstruction[],
   feePayer: PublicKey
 ): Promise<Transaction> => {
-  const connection = new Connection('https://api.mainnet-beta.solana.com');
   let transaction = new Transaction();
   instructions.forEach(instruction => transaction.add(instruction));
   const latestBlockhash = await connection.getLatestBlockhash('finalized');
@@ -54,7 +54,14 @@ const BodyContent = (props: Props) => {
     const _transaction = await makeTxn(instructions, wallet.publicKey as any);
     if (wallet.signTransaction) {
       const transaction = await wallet.signTransaction(_transaction);
-      console.log(transaction.compileMessage());
+
+      const txid = await connection.sendRawTransaction(transaction.serialize(), {
+        skipPreflight: true,
+        preflightCommitment: 'confirmed',
+      });
+
+      console.log(txid);
+      alert(`New transaction created ${txid}`);
     }
   };
 
@@ -73,7 +80,16 @@ const BodyContent = (props: Props) => {
         _transaction,
         _transaction,
       ]);
-      console.log(transactions.map(transaction => transaction.compileMessage()));
+
+      console.log(transactions);
+      for (const transaction of transactions){
+        const txid = await connection.sendRawTransaction(transaction.serialize(), {
+          skipPreflight: true,
+          preflightCommitment: 'confirmed',
+        });
+        console.log(txid);
+        alert(`New transaction created ${txid}`);
+      }
     }
   };
 
