@@ -82,7 +82,7 @@ const BodyContent = (props: Props) => {
       ]);
 
       console.log(transactions);
-      for (const transaction of transactions){
+      for (const transaction of transactions) {
         const txid = await connection.sendRawTransaction(transaction.serialize(), {
           skipPreflight: true,
           preflightCommitment: 'confirmed',
