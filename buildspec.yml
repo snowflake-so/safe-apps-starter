@@ -1,0 +1,22 @@
+#AWS Pipeline Build Configuration
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 16
+  pre_build:
+    commands:
+      - echo Build Start
+  build:
+    commands:
+      - cd examples/safe-apps-example
+      - npm install
+      - npm run build
+  post_build:
+    commands:
+      - echo Build completed on `date`
+artifacts:
+  files:
+    - '**/*'
+  base-directory: 'examples/safe-apps-example/build'
