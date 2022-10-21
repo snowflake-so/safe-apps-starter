@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 import { Button } from 'antd';
 import { Connection, PublicKey, Transaction, TransactionInstruction } from '@solana/web3.js';
+import { SnowflakeSafeWalletAdapter } from '@snowflake-so/wallet-adapter-snowflake';
 
 type Props = {};
 
@@ -37,6 +38,17 @@ export const instructions = [
 
 const BodyContent = (props: Props) => {
   const wallet = useWallet();
+  const adapter = useMemo<SnowflakeSafeWalletAdapter | undefined>(
+    () => wallet.wallet?.adapter as any,
+    [wallet]
+  );
+
+  const setProposalName = (name: string) => {
+    if (adapter?.isSnowflakeSafe) {
+      adapter.setProposalName(name);
+    }
+  };
+
   const handleCreateProposal = async () => {
     const _transaction = await makeTxn(instructions, wallet.publicKey as any);
     const txId = await wallet.sendTransaction(
@@ -53,6 +65,8 @@ const BodyContent = (props: Props) => {
   const handleSignTransaction = async () => {
     const _transaction = await makeTxn(instructions, wallet.publicKey as any);
     if (wallet.signTransaction) {
+      setProposalName('Sign transaction | Proposal');
+
       const transaction = await wallet.signTransaction(_transaction);
 
       const txid = await connection.sendRawTransaction(transaction.serialize(), {
@@ -75,6 +89,8 @@ const BodyContent = (props: Props) => {
   const handleSignAllTransactions = async () => {
     const _transaction = await makeTxn(instructions, wallet.publicKey as any);
     if (wallet.signAllTransactions) {
+      setProposalName('Sign all transactions | Proposal');
+
       const transactions = await wallet.signAllTransactions([
         _transaction,
         _transaction,
