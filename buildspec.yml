@@ -1,4 +1,4 @@
-#AWS Pipeline Build Configuration
+# AWS Pipeline Build Configuration
 version: 0.2
 
 phases:
