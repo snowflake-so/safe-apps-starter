@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 import { Button } from 'antd';
-import { Connection, PublicKey, Transaction, TransactionInstruction } from '@solana/web3.js';
+import { Connection, PublicKey, Transaction, TransactionInstruction, Signer } from '@solana/web3.js';
 import { SnowflakeSafeWalletAdapter } from '@snowflake-so/wallet-adapter-snowflake';
 
 type Props = {};
@@ -49,6 +49,12 @@ const BodyContent = (props: Props) => {
     }
   };
 
+  const setSigners = (signers: Signer[]) => {
+    if (adapter?.isSnowflakeSafe) {
+      adapter.setSigners(signers);
+    }
+  };
+
   const handleCreateProposal = async () => {
     const _transaction = await makeTxn(instructions, wallet.publicKey as any);
     const txId = await wallet.sendTransaction(
@@ -66,6 +72,7 @@ const BodyContent = (props: Props) => {
     const _transaction = await makeTxn(instructions, wallet.publicKey as any);
     if (wallet.signTransaction) {
       setProposalName('Sign transaction | Proposal');
+      setSigners([]);
 
       const transaction = await wallet.signTransaction(_transaction);
 
@@ -90,6 +97,7 @@ const BodyContent = (props: Props) => {
     const _transaction = await makeTxn(instructions, wallet.publicKey as any);
     if (wallet.signAllTransactions) {
       setProposalName('Sign all transactions | Proposal');
+      setSigners([]);
 
       const transactions = await wallet.signAllTransactions([
         _transaction,

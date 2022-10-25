@@ -3,6 +3,7 @@
 Check directory `examples/wallet-adapter-snowflake` for examples on how to use libraries to integrate with Snowflake Safe.
 
 ## Using Wallet Adapter Snowflake
+[![npm](https://img.shields.io/npm/v/@snowflake-so/wallet-adapter-snowflake)](https://www.npmjs.com/package/@snowflake-so/wallet-adapter-snowflake)
 
 **Note**: The implemented application only works inner Snowflake Safe app.
 
@@ -62,13 +63,29 @@ const txId = await wallet.sendTransactions(
   transaction,
   null as any,
   {
+    signers: [], // List of signers
     name: 'Mock proposal',
   } as any
+);
+```
+or
+```typescript
+const wallet = useWallet();
+
+wallet.setProposalName("Mock proposal");
+wallet.setSigners(signers); // List of signers
+
+const txId = await wallet.sendTransactions(
+  transaction,
+  connection
 );
 ```
 ### Sign a transaction
 ```typescript
 const wallet = useWallet();
+
+wallet.setProposalName("Mock proposal");
+wallet.setSigners(signers); // List of signers
 
 const transaction : Transaction = await wallet.signTransaction(
   transaction,
@@ -85,6 +102,9 @@ const message : Uint8Array = await wallet.signMessage(
 ### Sign all transactions
 ```typescript
 const wallet = useWallet();
+
+wallet.setProposalName("Mock proposal");
+wallet.setSigners(signers); // List of signers
 
 const transactions : Transaction[] = await wallet.signAllTransactions(
   transactions,
