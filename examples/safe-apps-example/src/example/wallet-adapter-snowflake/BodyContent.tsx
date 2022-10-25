@@ -2,7 +2,13 @@ import React, { useMemo } from 'react';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 import { Button } from 'antd';
-import { Connection, PublicKey, Transaction, TransactionInstruction, Signer } from '@solana/web3.js';
+import {
+  Connection,
+  PublicKey,
+  Transaction,
+  TransactionInstruction,
+  Signer,
+} from '@solana/web3.js';
 import { SnowflakeSafeWalletAdapter } from '@snowflake-so/wallet-adapter-snowflake';
 
 type Props = {};
